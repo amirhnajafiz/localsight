@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/amirhnajafiz/k8sese/internal/metrics"
-	"github.com/amirhnajafiz/k8sese/pkg/fetch"
-	"github.com/amirhnajafiz/k8sese/pkg/types"
+	"github.com/amirhnajafiz/localsight/internal/metrics"
+	"github.com/amirhnajafiz/localsight/pkg/fetch"
+	"github.com/amirhnajafiz/localsight/pkg/types"
 
 	"go.uber.org/zap"
 )

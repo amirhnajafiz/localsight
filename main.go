@@ -3,10 +3,10 @@ package main
 import (
 	"time"
 
-	"github.com/amirhnajafiz/k8sese/internal/collector"
-	"github.com/amirhnajafiz/k8sese/internal/configs"
-	"github.com/amirhnajafiz/k8sese/internal/logr"
-	"github.com/amirhnajafiz/k8sese/internal/metrics"
+	"github.com/amirhnajafiz/localsight/internal/collector"
+	"github.com/amirhnajafiz/localsight/internal/configs"
+	"github.com/amirhnajafiz/localsight/internal/logr"
+	"github.com/amirhnajafiz/localsight/internal/metrics"
 
 	"go.uber.org/zap"
 )
