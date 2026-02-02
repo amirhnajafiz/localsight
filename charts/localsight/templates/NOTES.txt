@@ -4,4 +4,4 @@ Kubernetes Local Storage Metric Exporter is deployed.
 2. A {{ .Values.service.type }} with port {{ .Values.service.port }} is created to expose metrics.
 {{- end }}
 
-Happy Exporting!
+Happy Sighting!

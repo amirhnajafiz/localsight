@@ -4,9 +4,9 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   labels:
-    app.kubernetes.io/component: local-storage-metrics-exporter-service-monitor
-    app.kubernetes.io/name: local-storage-metrics-exporter
-  name: {{ include "local-storage-metrics-exporter.fullname" . }}
+    app.kubernetes.io/component: localsight-service-monitor
+    app.kubernetes.io/name: localsight
+  name: {{ include "localsight.fullname" . }}
   namespace: {{ .Release.Namespace }}
 spec:
   endpoints:
@@ -20,6 +20,6 @@ spec:
     - {{ .Values.servicemonitor.namespaceSelector }}
   selector:
     matchLabels:
-      app.kubernetes.io/component: local-storage-metrics-exporter-service
-      app.kubernetes.io/name: local-storage-metrics-exporter
+      app.kubernetes.io/component: localsight-service
+      app.kubernetes.io/name: localsight
 {{- end }}

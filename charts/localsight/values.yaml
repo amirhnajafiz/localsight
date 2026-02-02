@@ -1,5 +1,5 @@
-# Default values for local-storage-metrics-exporter.
-fullnameOverride: local-storage-metrics-exporter
+# Default values for localsight.
+fullnameOverride: localsight
 
 # Image configuration
 image:

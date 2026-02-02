@@ -1,0 +1,7 @@
+# LocalSight Helm Chart
+# This chart deploys a metrics exporter for local storage in Kubernetes clusters.
+apiVersion: v2
+name: localsight
+description: Helm chart for localsight
+version: 0.0.1
+appVersion: "v0.2.0"

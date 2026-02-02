@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "local-storage-metrics-exporter.name" -}}
+{{- define "localsight" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -46,7 +46,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "local-storage-metrics-exporter.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "local-storage-metrics-exporter.name" . }}
+app.kubernetes.io/name: {{ include "localsight" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
