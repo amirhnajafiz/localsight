@@ -19,6 +19,7 @@ type PodSummary struct {
 		UID       string `json:"uid"`
 	} `json:"podRef"`
 	Containers       []ContainerSummary `json:"containers"`
+	Volume           []VolumeSummary    `json:"volume"`
 	EphemeralStorage struct {
 		AvailableBytes uint64 `json:"availableBytes"`
 		CapacityBytes  uint64 `json:"capacityBytes"`
@@ -27,6 +28,17 @@ type PodSummary struct {
 		InodesFree     uint64 `json:"inodesFree"`
 		InodesUsed     uint64 `json:"inodesUsed"`
 	} `json:"ephemeral-storage"`
+}
+
+// VolumeSummary contains information about each volume in the pod summary.
+type VolumeSummary struct {
+	Name           string `json:"name"`
+	AvailableBytes uint64 `json:"availableBytes"`
+	CapacityBytes  uint64 `json:"capacityBytes"`
+	UsedBytes      uint64 `json:"usedBytes"`
+	Inodes         uint64 `json:"inodes"`
+	InodesFree     uint64 `json:"inodesFree"`
+	InodesUsed     uint64 `json:"inodesUsed"`
 }
 
 // ContainerSummary contains information about each container in the pod summary.
