@@ -27,6 +27,18 @@ func main() {
 	// initialize a zap logger
 	logger := logr.NewZapLogger(conf.Debug, conf.JSONLog)
 
+	// print config values
+	logger.Info(
+		"config",
+		zap.Int("port", conf.Port),
+		zap.Bool("debug", conf.Debug),
+		zap.Bool("json", conf.JSONLog),
+		zap.String("interval", conf.Interval),
+		zap.String("node", conf.NodeName),
+		zap.String("cert", conf.CertFile),
+		zap.String("key", conf.KeyFile),
+	)
+
 	// create a new metrics instance
 	mtx, err := metrics.NewMetrics()
 	if err != nil {
