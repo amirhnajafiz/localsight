@@ -18,6 +18,12 @@ func main() {
 		panic(err)
 	}
 
+	// convert the interval
+	interval, err := time.ParseDuration(conf.Interval)
+	if err != nil {
+		panic(err)
+	}
+
 	// initialize a zap logger
 	logger := logr.NewZapLogger(conf.Debug, conf.JSONLog)
 
@@ -38,7 +44,7 @@ func main() {
 		EndPoint: conf.K8SLocalAPI,
 		Logr:     logger.Named("collector"),
 		Metrics:  mtx,
-		Interval: time.Duration(conf.Interval) * time.Second,
+		Interval: interval,
 	}
 
 	// start the collector to fetch and update metrics
