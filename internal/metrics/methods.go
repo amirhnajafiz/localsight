@@ -69,3 +69,23 @@ func (m *Metrics) SetContainerLogsInodes(
 	m.containerLogsInodesFree.WithLabelValues(pod, namespace, node, container).Set(available)
 	m.containerLogsInodes.WithLabelValues(pod, namespace, node, container).Set(capacity)
 }
+
+// SetPodVolumeValues sets the pod volume metrics for a specific volume in a pod, namespace, and node.
+func (m *Metrics) SetPodVolumeValues(
+	pod, namespace, node, volume string,
+	used, available, capacity float64,
+) {
+	m.podVolumeUsageBytes.WithLabelValues(pod, namespace, node, volume).Set(used)
+	m.podVolumeAvailableBytes.WithLabelValues(pod, namespace, node, volume).Set(available)
+	m.podVolumeCapacityBytes.WithLabelValues(pod, namespace, node, volume).Set(capacity)
+}
+
+// SetPodVolumeInodes sets the pod volume inode metrics for a specific volume in a pod, namespace, and node.
+func (m *Metrics) SetPodVolumeInodes(
+	pod, namespace, node, volume string,
+	used, available, capacity float64,
+) {
+	m.podVolumeInodesUsed.WithLabelValues(pod, namespace, node, volume).Set(used)
+	m.podVolumeInodesFree.WithLabelValues(pod, namespace, node, volume).Set(available)
+	m.podVolumeInodes.WithLabelValues(pod, namespace, node, volume).Set(capacity)
+}
