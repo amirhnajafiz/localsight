@@ -4,7 +4,7 @@ import "github.com/prometheus/client_golang/prometheus"
 
 // constant values for namespace and subsystem
 const (
-	NS = "KES"
+	NS = "storage"
 	SS = "exporter"
 )
 

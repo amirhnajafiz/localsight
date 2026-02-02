@@ -29,11 +29,11 @@ spec:
               name: metrics
               protocol: TCP
           env:
-            - name: K8SESE_PORT
+            - name: LSE_PORT
               value: "{{ .Values.config.port }}"
-            - name: K8SESE_DEBUG
+            - name: LSE_DEBUG
               value: "{{ .Values.config.debug }}"
-            - name: K8SESE_INTERVAL
+            - name: LSE_INTERVAL
               value: "{{ .Values.config.interval }}"
           resources:
             requests:
