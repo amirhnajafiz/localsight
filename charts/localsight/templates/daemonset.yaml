@@ -33,6 +33,8 @@ spec:
               value: "{{ .Values.config.port }}"
             - name: LSE_DEBUG
               value: "{{ .Values.config.debug }}"
+            - name: LSE_JSON_LOG
+              value: "{{ .Values.config.json }}"
             - name: LSE_INTERVAL
               value: "{{ .Values.config.interval }}"
             - name: LSE_NODE_NAME

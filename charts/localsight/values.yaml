@@ -34,5 +34,7 @@ config:
   port: 8080
   # Enable debug mode
   debug: false
+  # JSON format for logs
+  json: false
   # Scraping interval
   interval: 10s

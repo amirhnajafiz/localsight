@@ -73,7 +73,7 @@ func (c *Collector) Start() error {
 			c.setContainerStorageUsage(pod, summary.Node.NodeName)
 		}
 
-		c.Logr.Debug("successfully updated storage usage metrics", zap.String("node", summary.Node.NodeName))
+		c.Logr.Info("successfully set storage usage metrics", zap.String("node", c.NodeName))
 	}
 }
 
