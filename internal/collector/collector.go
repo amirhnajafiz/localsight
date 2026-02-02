@@ -56,6 +56,7 @@ func (c *Collector) Start(endpoint string) error {
 		// process the summary data and update the metrics
 		for _, pod := range summary.Pods {
 			c.setPodStorageUsage(pod, summary.Node.NodeName)
+			c.setVolumeStorageUsage(pod, summary.Node.NodeName)
 			c.setContainerStorageUsage(pod, summary.Node.NodeName)
 		}
 
@@ -84,6 +85,31 @@ func (c *Collector) setPodStorageUsage(pod types.PodSummary, nodeName string) {
 		float64(pod.EphemeralStorage.InodesFree),
 		float64(pod.EphemeralStorage.Inodes),
 	)
+}
+
+// setVolumeStorageUsage sets the volume usage for a volume in the provided metrics instance.
+func (c *Collector) setVolumeStorageUsage(pod types.PodSummary, nodeName string) {
+	for _, volume := range pod.Volume {
+		c.Metrics.SetPodVolumeValues(
+			pod.PodRef.Name,
+			pod.PodRef.Namespace,
+			nodeName,
+			volume.Name,
+			float64(volume.UsedBytes),
+			float64(volume.AvailableBytes),
+			float64(volume.CapacityBytes),
+		)
+
+		c.Metrics.SetPodVolumeInodes(
+			pod.PodRef.Name,
+			pod.PodRef.Namespace,
+			nodeName,
+			volume.Name,
+			float64(volume.InodesUsed),
+			float64(volume.InodesFree),
+			float64(volume.Inodes),
+		)
+	}
 }
 
 // setContainerStorageUsage sets the storage usage for each container in a pod in the provided metrics instance.
