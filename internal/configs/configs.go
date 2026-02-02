@@ -12,6 +12,8 @@ type Config struct {
 	Debug       bool   `env:"LSE_DEBUG" envDefault:"false"`
 	Interval    int    `env:"LSE_INTERVAL" envDefault:"10"` // in seconds
 	JSONLog     bool   `env:"LSE_JSON_LOG" envDefault:"false"`
+	CertFile    string `env:"LSE_CERT_FILE" envDefault:"/var/lib/kubelet/pki/kubelet-client-current.pem"`
+	KeyFile     string `env:"LSE_KEY_FILE" envDefault:"/var/lib/kubelet/pki/kubelet-client-current.pem"`
 	K8SLocalAPI string `env:"LSE_K8S_LOCAL_API" envDefault:""`
 }
 

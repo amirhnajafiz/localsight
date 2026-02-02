@@ -14,6 +14,10 @@ import (
 // Collector is responsible for collecting storage usage metrics from the kubelet summary endpoint
 // and updating the provided metrics instance with the collected data.
 type Collector struct {
+	CertFile string
+	KeyFile  string
+	EndPoint string
+
 	Logr     *zap.Logger
 	Metrics  *metrics.Metrics
 	Interval time.Duration
@@ -21,9 +25,9 @@ type Collector struct {
 
 // Start initiates the process of fetching storage usage metrics from the kubelet summary endpoint
 // and updates the provided metrics instance with the data.
-func (c *Collector) Start(endpoint string) error {
+func (c *Collector) Start() error {
 	// build the HTTP request to the kubelet summary endpoint
-	req, err := buildHTTPRequest(endpoint)
+	req, err := buildHTTPRequest(c.EndPoint)
 	if err != nil {
 		return fmt.Errorf("failed to build HTTP request: %w", err)
 	}
@@ -40,7 +44,7 @@ func (c *Collector) Start(endpoint string) error {
 		c.Logr.Debug("fetching kubelet summary for storage usage metrics")
 
 		// perform the HTTP GET request
-		resp, err := fetch.GET(req)
+		resp, err := fetch.GET(req, c.CertFile, c.KeyFile)
 		if err != nil {
 			c.Logr.Error("failed to fetch kubelet summary", zap.Error(err))
 			continue

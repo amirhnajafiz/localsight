@@ -7,14 +7,8 @@ import (
 	"net/http"
 )
 
-const (
-	// kubeletClientCert and key files for the kubelet client.
-	certFile = "/var/lib/kubelet/pki/kubelet-client-current.pem"
-	keyFile  = "/var/lib/kubelet/pki/kubelet-client-current.pem"
-)
-
 // GET performs an HTTP GET request using the provided request object.
-func GET(req *http.Request) (*http.Response, error) {
+func GET(req *http.Request, certFile, keyFile string) (*http.Response, error) {
 	// load client cert
 	cert, err := tls.LoadX509KeyPair(certFile, keyFile)
 	if err != nil {
@@ -42,7 +36,7 @@ func GET(req *http.Request) (*http.Response, error) {
 }
 
 // JSON decodes the JSON response from the provided HTTP response object into the given interface.
-func JSON(resp *http.Response, v interface{}) error {
+func JSON(resp *http.Response, v any) error {
 	defer resp.Body.Close()
 	if resp.StatusCode != http.StatusOK {
 		return fmt.Errorf("unexpected status code: %d", resp.StatusCode)

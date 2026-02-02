@@ -32,13 +32,16 @@ func main() {
 
 	// create a new collector instance with the metrics
 	col := &collector.Collector{
+		CertFile: conf.CertFile,
+		KeyFile:  conf.KeyFile,
+		EndPoint: conf.K8SLocalAPI,
 		Logr:     logger.Named("collector"),
 		Metrics:  mtx,
 		Interval: time.Duration(conf.Interval) * time.Second,
 	}
 
 	// start the collector to fetch and update metrics
-	if err := col.Start(conf.K8SLocalAPI); err != nil {
+	if err := col.Start(); err != nil {
 		logger.Fatal("failed to start collector", zap.Error(err))
 	}
 }
