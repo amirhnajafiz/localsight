@@ -1,5 +1,15 @@
 package metrics
 
+// SetAPIValues sets the summary API status on the target node.
+func (m *Metrics) SetAPIStatus(node string, status int) {
+	m.apiStatus.WithLabelValues(node).Set(float64(status))
+}
+
+// SetAPIValues sets the summary API metrics on the target node.
+func (m *Metrics) SetAPIValues(node string, latency float64) {
+	m.apiLatency.WithLabelValues(node).Set(latency)
+}
+
 // SetEphemeralStorageValues sets the ephemeral storage metrics for a specific pod, namespace, and node.
 func (m *Metrics) SetEphemeralStorageValues(
 	pod, namespace, node string,

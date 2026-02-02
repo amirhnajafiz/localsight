@@ -14,6 +14,7 @@ import (
 // Collector is responsible for collecting storage usage metrics from the kubelet summary endpoint
 // and updating the provided metrics instance with the collected data.
 type Collector struct {
+	NodeName string
 	CertFile string
 	KeyFile  string
 	EndPoint string
@@ -44,11 +45,19 @@ func (c *Collector) Start() error {
 		c.Logr.Debug("fetching kubelet summary for storage usage metrics")
 
 		// perform the HTTP GET request
+		start := time.Now()
 		resp, err := fetch.GET(req, c.CertFile, c.KeyFile)
 		if err != nil {
+			c.Metrics.SetAPIStatus(c.NodeName, 0)
+			c.Metrics.SetAPIValues(c.NodeName, 0)
+
 			c.Logr.Error("failed to fetch kubelet summary", zap.Error(err))
 			continue
 		}
+
+		// update API metrics
+		c.Metrics.SetAPIStatus(c.NodeName, 1)
+		c.Metrics.SetAPIValues(c.NodeName, time.Since(start).Seconds())
 
 		// decode the JSON response into a summary structure
 		var summary types.Summary

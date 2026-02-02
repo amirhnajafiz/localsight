@@ -21,7 +21,7 @@ spec:
     spec:
       hostNetwork: true
       containers:
-        - name: exporter
+        - name: exporter-container
           image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
@@ -35,6 +35,10 @@ spec:
               value: "{{ .Values.config.debug }}"
             - name: LSE_INTERVAL
               value: "{{ .Values.config.interval }}"
+            - name: LSE_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
           resources:
             requests:
               cpu: {{ .Values.resources.requests.cpu }}

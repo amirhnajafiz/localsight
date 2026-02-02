@@ -14,6 +14,10 @@ const (
 
 // Metrics holds the Prometheus metrics for the exporter.
 type Metrics struct {
+	// API Metrics
+	apiStatus  *prometheus.GaugeVec
+	apiLatency *prometheus.GaugeVec
+
 	// Ephemeral Storage
 	ephemeralStorageAvailableBytes *prometheus.GaugeVec
 	ephemeralStorageCapacityBytes  *prometheus.GaugeVec
@@ -56,6 +60,16 @@ type Metrics struct {
 func NewMetrics() (*Metrics, error) {
 	// create Prometheus metrics using the newGaugeVec helper function in utils.go
 	return &Metrics{
+		apiStatus: newGaugeVec(prometheus.GaugeOpts{
+			Namespace: NS,
+			Name:      "api_status",
+			Help:      "Summary API status on the target node (0 is down, 1 is up)",
+		}, []string{"exported_node"}),
+		apiLatency: newGaugeVec(prometheus.GaugeOpts{
+			Namespace: NS,
+			Name:      "api_latency",
+			Help:      "Summary API response time in seconds",
+		}, []string{"exported_node"}),
 		ephemeralStorageAvailableBytes: newGaugeVec(prometheus.GaugeOpts{
 			Namespace: NS,
 			Subsystem: SSEphemeralStorage,

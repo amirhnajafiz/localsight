@@ -32,6 +32,7 @@ func main() {
 
 	// create a new collector instance with the metrics
 	col := &collector.Collector{
+		NodeName: conf.NodeName,
 		CertFile: conf.CertFile,
 		KeyFile:  conf.KeyFile,
 		EndPoint: conf.K8SLocalAPI,
